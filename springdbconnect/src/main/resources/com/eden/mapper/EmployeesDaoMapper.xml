@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eden.dao.EmployeesDao">
+
+	<select id="findall" resultType="Employees">
+		select * from `employees`
+	</select>
+	
+	<insert id="save" parameterType="Employees" useGeneratedKeys="true" keyProperty="employee_id">
+	
+	 INSERT INTO `employees` (employee_id, employee_name, gender, age, department, salary, address, id_card_number)
+		VALUES
+		(#{employee_id}, #{employee_name}, #{gender}, #{age}, #{department}, #{salary}, #{address}, #{id_card_number})
+	
+	</insert>
+
+</mapper>

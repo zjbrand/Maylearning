@@ -1,0 +1,36 @@
+server:
+  port: 20252
+  servlet:
+    context-path: /empthymeleaf
+    
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+  datasource:
+    type:  com.zaxxer.hikari.HikariDataSource #spring默认的连接池
+    driver-class-name:  com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/eden-thymeleaf?characterEncoding=UTF-8
+    username: root
+    password: 5312448th
+  web:
+    resources:
+      static-locations: classpath:/static/,file:${file.upload.dir}
+    
+
+mybatis:
+  mapper-locations:  classpath:com/eden/mapper/*.xml
+  type-aliases-package:  com.eden.entity
+  
+file:
+  upload:
+    dir: C:\pleiades2023\2023-12\workspace202404\emphtml\upload
+  
+#logging:
+#  level:
+#    root: info
+#    '[com.eden]': debug
+#  file:
+#    name: run.log
+#    path: ./

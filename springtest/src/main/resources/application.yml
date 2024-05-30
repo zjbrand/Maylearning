@@ -1,0 +1,11 @@
+name: 田中
+age: 24
+birthday: 2002/12/12
+gender: true
+
+server:
+  port: 2024 #port設定
+  servlet:
+    context-path: /eden-test #プロジェクトの名
+ 
+  

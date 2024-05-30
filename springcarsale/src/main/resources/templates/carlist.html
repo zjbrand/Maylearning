@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>carlist</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/style.css}"/>    	
+	<script th:src="@{/js/script.js}"></script>	
+	<style>		
+		.cartable{
+			width: 1000px;
+		}
+		
+		.row1 td, .row2 td, .row_hover td {
+			padding: 5px 10px;
+			color: #666666;
+			border: 1px solid #CBD6DE;
+		}
+		.row1 td {
+			background: #ffffff;
+		}
+		.row2 td {
+			background: #eeeeee;
+		}
+		.row_hover td {
+			background: #FBFACE;
+			color: #000000;
+		}
+	</style>
+</head>
+<body>
+<div id="wrap">			
+	<div id="slogon">
+		<img th:src="@{/img/SampleLogSm.jpg}" alt="SampleLog" width="200px" height="45px">
+	</div>			
+	<div id="navigate">	
+		<span id="nowtime">2024年05月27日  月曜日   11時02分03秒</span>
+			
+		<a th:href="@{/admin/logout}" id="linkexit">安全退出</a>
+	</div>
+	<div id="carlist">
+        <p id="whereami">
+        </p>
+        <h1>
+            ようこそ<span th:if="${session.admin!=null}" th:text="${session.admin.realname}"></span>!
+            <span th:if="${session.admin==null}">ゲスト</span>
+        </h1>
+        <div style="margin-bottom:10px; text-align:right;">
+        	<div style="height: 20px;">
+				<span id="msg" style="color: red;font-size: 14px;line-height: 20px;"></span>
+			</div>	
+			<form th:action="@{/salecar/search}" method="post" onsubmit="return checkDate()">
+			車の型:<input type="text" name="searchName" style="width:60px">
+			価格範囲<input type="text" name="lowSalary" style="width:60px" pattern="\d*" title="金額は数字だけ組合わせです">~
+					<input type="text" name="topSalary" style="width:60px" pattern="\d*" title="金額は数字だけ組合わせです">
+			生産時間範囲<input type="text" id="date_begin" name="dateBegin" style="width:70px" placeholder="2000/01/01"/>
+					  <input type="text" id="date_end" name="dateEnd" style="width:70px"  placeholder="2000/01/01"/>
+			<input type="submit" class="button" value="検索">
+			</form>
+		</div>
+		
+        <table class="cartable">
+            <tr class="table_header">
+                <td>
+                    CarID
+                </td>
+                <td>
+                    車の型
+                </td>
+                <td>
+                    車輌写真
+                </td>
+                <td>
+                   生産時間
+                </td>
+                <td>
+                    価格
+                </td>
+                <td>
+                    里程
+                </td>
+                <td>
+                    保有者
+                </td>
+                <td>
+                    性別
+                </td>
+                <td>
+                    電話番号
+                </td>
+                <td>
+                    保有者の居住地
+                </td>
+                <td>
+                    更新時間
+                </td>
+                <td>
+                    操作
+                </td>
+            </tr>
+            
+            <tr th:each="salecar,state:${carList}"  th:class="${state.odd?'row1':'row2'}">			
+                <td>
+                    <span th:text="${salecar.carid}"/>
+                </td>
+                <td>
+                    <span th:text="${salecar.carBrand}"/>
+                </td>
+                <td>
+                    <img th:src="@{/}+${salecar.photo}" style="height: 40px;">
+                </td>
+                <td>
+                    <span th:text="${#dates.format(salecar.produceDate,'yyyy-MM-dd')}"/>
+                </td>
+                <td>
+                    <span th:text="${salecar.salePrice}"/>
+                </td>
+                <td>
+                    <span th:text="${salecar.odometer}"/>
+                </td>
+                <td>
+                    <span th:text="${salecar.owner}"/>
+                </td>
+                <td>
+                    <span th:text="${salecar.gender?'男':'女'}"/> 
+                                  
+                </td>
+                <td>
+                    <span th:text="${salecar.phonenum}"/>
+                </td>
+                <td>
+                    <span th:text="${salecar.address}"/>
+                </td>
+                <td>
+                    <span th:text="${#dates.format(salecar.modifyTime,'yyyy-MM-dd')}"/>
+                </td>
+                <td>
+                    <a href="javascript:;" th:onclick="'delCar('+${salecar.carid}+')'">削除</a>&nbsp;
+                    <a th:href="@{/salecar/detail(carid=${salecar.carid})}">更新</a>
+                </td>
+            </tr>
+        </table>
+        <p>
+            <input type="button" class="button" value="車輌を追加する" onclick="addCar()"/>
+        </p>
+        <script>
+			function addCar(){
+				location.href='[[@{/addCar}]]'
+			}
+			
+			function delCar(id){
+				console.log(id)
+				if(window.confirm("この車輌の情報を削除していいですか？")){
+					//console.log('true')
+					location.href="[[@{/salecar/delete?id=}]]"+id
+				}
+			}			
+			
+			const nowtime = document.querySelector('#nowtime')
+			setInterval(() => {
+				nowtime.innerHTML = getTime()
+			  }, 1000)
+			
+			function checkDate() {
+				const begincontent =document.querySelector('#date_begin').value		
+				const endcontent =document.querySelector('#date_end').value
+				const msg = document.querySelector('#msg')				
+				
+				var regxName = /^(19|20)\d{2}\/(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])$/
+				
+				if (begincontent !== "" && !begincontent.match(regxName)) {
+				    msg.innerHTML = "誤る日付を入力している。"
+				    setTimeout(function() {
+		                msg.innerHTML = "";
+		            }, 3000); 
+				    return false;
+				}			
+				
+				if (endcontent !== "" && !endcontent.match(regxName)) {
+				    msg.innerHTML = "誤る日付を入力している。"				    
+				    setTimeout(function() {
+		                msg.innerHTML = "";
+		            }, 3000); 
+				    return false;
+				}
+				
+		        return true	      
+	    } 
+		
+		</script>
+    </div>
+</div>	
+</body>
+</html>

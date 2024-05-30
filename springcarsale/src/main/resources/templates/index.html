@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>regist</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" type="text/css" href="style/style.css"/>
+		<script src="js/script.js"></script>
+		<script src="js/Jquery.mins.js"></script>
+	<style>    
+
+    .slider {
+      width: 900px;
+      height: 540px;
+      margin:0 auto
+    }
+
+    .slider-wrapper {
+      width: 100%;
+      height: 100%;
+    }
+
+    .slider-wrapper img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .slider-footer {
+      height: 80px;
+      background-color: rgb(100, 67, 68);
+      padding: 12px 12px 0 12px;
+      position: relative;
+    }
+
+    .slider-footer .toggle {
+      position: absolute;
+      right: 0;
+      top: 12px;
+      display: flex;
+    }
+
+    .slider-footer .toggle button {
+      margin-right: 12px;
+      width: 28px;
+      height: 28px;
+      appearance: none;
+      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .slider-footer .toggle button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .slider-footer p {
+      margin: 0;
+      color: #fff;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .slider-indicator {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .slider-indicator li {
+      width: 8px;
+      height: 8px;
+      margin: 4px;
+      border-radius: 50%;
+      background: #fff;
+      opacity: 0.4;
+      cursor: pointer;
+    }
+
+    .slider-indicator li.active {
+      width: 12px;
+      height: 12px;
+      opacity: 1;
+    }
+    
+  </style>
+	</head>
+	<body>
+		<div id="wrap">			
+			<div id="slogon">
+				<img src="img/SampleLogSm.jpg" alt="SampleLog" width="200px" height="45px">				
+			</div>			
+			<div id="navigate">	
+				<span id="nowtime"></span>		
+			</div>
+			<div class="slider">				
+			    <div class="slider-wrapper">
+			      <img id="sliderimg" src="img/31.jpg" alt="" />
+			    </div>
+			    <div class="slider-footer">
+			      <p style="color: rgb(255, 255, 255);">一括査定の流れ</p>
+			      <ul class="slider-indicator">
+			        <li class="active"></li>
+			        <li></li>
+			        <li></li>
+			        <li></li>
+			        <li></li>
+			        <li></li>
+			      </ul>
+			      <div class="toggle">
+			        <button class="prev">&lt;</button>
+			        <button class="next">&gt;</button>
+			      </div>
+			    </div>
+			</div>
+			<div style="margin-top: 110px;">
+				<div style="float: right;">
+					<input type="button" class="button" value="新規>>" onclick="regist()"/>
+					<input type="button" class="button" value="登録>>" onclick="login()"/>            
+				</div>
+				<div id="footer" style="margin-top: 30px;">			
+				<br>
+				<br>				
+				<hr>
+				ABC@126.com
+				</div>
+			</div>
+		</div>
+		<script>
+			function regist() {
+			    const registerUrl = '[[@{/register}]]'; 
+			    clearInterval(clock);
+			    jQuery("#wrap").fadeOut(2000);
+			    setTimeout(() => {
+			        location.href = registerUrl;
+			    }, 2000);
+}			
+			function login(){
+				clearInterval(clock);
+			    $("#wrap").fadeOut(2000);
+			    setTimeout(() => {
+			        location.href='[[@{/login}]]';
+			    }, 2000);				
+			}	
+			const sliderData = [
+		      /*{ url: 'img/1.jpg', title: '一括査定の流れ', color: 'rgb(220, 222, 221)' },
+		      { url: 'img/2.jpg', title: '手放すか迷っている方', color: 'rgb(53, 71, 30)' },
+		      { url: 'img/3.jpg', title: '古い車やり取りを安心し', color: 'rgb(207, 229, 243)' },
+		      { url: 'img/4.jpg', title: '売却先と利用法', color: 'rgb(163, 170, 186)' },
+		      { url: 'img/5.jpg', title: 'どんな車も買取可能です', color: 'rgb(0, 84, 174)' },
+		      { url: 'img/6.jpg', title: '廃車高く買取ります', color: 'rgb(240, 217, 75)' },*/
+		      
+		      /*{ url: 'img/11.jpg', title: '一括査定の流れ', color: 'rgb(187, 231, 244)' },
+		      { url: 'img/12.jpg', title: '手放すか迷っている方', color: 'rgb(217, 232, 238)' },
+		      { url: 'img/13.jpg', title: '古い車やり取りを安心し', color: 'rgb(223, 250, 250)' },
+		      { url: 'img/14.jpg', title: '売却先と利用法', color: 'rgb(134, 200, 205)' },
+		      { url: 'img/15.jpg', title: 'どんな車も買取可能です', color: 'rgb(160, 199, 198)' },
+		      { url: 'img/16.jpg', title: '廃車高く買取ります', color: 'rgb(221, 251, 250)' },*/
+		      
+		      { url: 'img/31.jpg', title: '一括査定の流れ', color: 'rgb(151, 153, 132)' },
+		      { url: 'img/32.jpg', title: '手放すか迷っている方', color: 'rgb(95, 147, 168)' },
+		      { url: 'img/33.jpg', title: '古い車やり取りを安心し', color: 'rgb(20, 32, 39)' },
+		      { url: 'img/34.jpg', title: '売却先と利用法', color: 'rgb(190, 161, 118)' },
+		      { url: 'img/35.jpg', title: 'どんな車も買取可能です', color: 'rgb(233, 240, 240)' },
+		      { url: 'img/36.jpg', title: '廃車高く買取ります', color: 'rgb(186, 159, 128)' },
+		     ]
+		
+		    const img = document.querySelector('#sliderimg');		    
+		
+		    const p = document.querySelector('p')		   
+		
+		    const ft = document.querySelector('.slider-footer')
+		    
+		    let i = 0
+		    let clock = setInterval(function () {
+		      i++
+		      if (i >= sliderData.length) {
+		        i = 0
+		      }
+		      toggle()
+		
+		    }, 4000)		   
+		
+		    const prev = document.querySelector('.prev')
+		    const next = document.querySelector('.next')
+		
+		    prev.addEventListener('click', function () {
+		      i--
+		
+		      if (i < 0) { i = sliderData.length - 1 }
+		
+		      toggle()
+		    })
+		
+		    next.addEventListener('click', function () {
+		      i++
+		
+		      if (i >= sliderData.length) { i = 0 }
+		
+		      toggle()
+		    })
+		
+		    function toggle() {
+		      img.src = sliderData[i].url
+		      p.innerHTML = sliderData[i].title
+		      ft.style.backgroundColor = sliderData[i].color
+		
+		      document.querySelector('.slider-indicator .active').classList.remove('active')
+		      const li = document.querySelector(`.slider-indicator li:nth-child(${i + 1})`)
+		      li.classList.add('active')
+		    }
+		
+		    const slider = document.querySelector('.slider')
+		    slider.addEventListener('mouseenter', function () {
+		      clearInterval(clock)
+		    })
+		
+		    slider.addEventListener('mouseleave', function () {
+		
+		      clearInterval(clock)
+		      clock = setInterval(function () {
+		        next.click()
+		      }, 2000)
+		
+		    })
+		    
+		    
+			const nowtime = document.querySelector('#nowtime')
+			setInterval(() => {
+				nowtime.innerHTML = getTime()
+			  }, 1000) 
+			  
+			
+		</script>
+	</body>
+</html>  

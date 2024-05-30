@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form th:action="@{/file/upload}" method="post" enctype="multipart/form-data">
+		<input type="file" name="file">
+		<input type="submit" value="アップロード">
+	</form>
+	<br>
+	<hr>
+	
+	<a th:href="@{/file/download?filename=app-2024-05-10.log}">app-2024-05-10.log</a><br>
+	<a th:href="@{/file/download?filename=carWhiteLinePrin.jpg}">carWhiteLinePrin.jpg</a><br>
+	<a th:href="@{/file/download?filename=IT日本単語.txt}">IT 日本単語.txt</a>
+	
+
+</body>
+</html>

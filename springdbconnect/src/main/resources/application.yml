@@ -1,0 +1,16 @@
+server:
+  port: 12024
+  servlet:
+    context-path: /dbconnect
+
+spring:  
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url:  jdbc:mysql://localhost:3306/eden?characterEncoding=UTF-8
+    username: root
+    password: 5312448th
+    
+mybatis:
+  mapper-locations:  classpath:com/eden/mapper/*.xml
+  type-aliases-package:  com.eden.entity

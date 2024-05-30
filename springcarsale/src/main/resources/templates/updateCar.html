@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>update SaleCar</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" type="text/css" th:href="@{/style/style.css}"/>
+		<script th:src="@{/js/script.js}"></script>
+	</head>
+
+	<body>
+		<div id="wrap">			
+			<div id="slogon">
+				<img th:src="@{/img/SampleLogSm.jpg}" alt="SampleLog" width="200px" height="45px">
+			</div>			
+			<div id="navigate">	
+				<span id="nowtime">2024年05月27日  月曜日     11時02分03秒</span>
+					
+				<a th:href="@{/admin/logout}" id="linkexit">安全退出</a>
+			</div>
+			<div class="container">
+				<div id="caradd"  style="margin-left: 8%;">
+					<p id="whereami">
+					</p>
+					<h1>
+						車輌情報更新:
+					</h1>
+					<form th:action="@{/salecar/update}" method="post" enctype="multipart/form-data" onsubmit="return checkDate()">
+						<table cellpadding="0" cellspacing="8px" border="0" class="form_table">
+							<tr>
+								<td valign="middle" align="right">
+									車輌番号:
+								</td>
+								<td valign="middle" align="left">
+									<span th:text="${salecar.carid}"></span>
+									<input type="hidden" name="carid" th:value="${salecar.carid}"/>
+								</td>
+							</tr>
+							<tr>
+								<td valign="middle" align="right">
+									車の型:
+								</td>
+								<td valign="middle" align="left">
+									<input type="text" class="inputgri" name="carBrand" th:value="${salecar.carBrand}"/>
+								</td>
+							</tr>
+							<tr>
+								<td valign="middle" align="right">
+									古い写真:
+								</td>
+								<td valign="middle" align="left">
+									<img th:src="@{/}+${salecar.photo}" style="height: 60px;">
+									
+								</td>
+							</tr>							
+							<tr>
+								<td valign="middle" align="right">
+									写真更新:	
+									<input type="hidden" name="photo" th:value="${salecar.photo}"/>								
+								</td>								
+								<td valign="middle" align="left">
+									<input type="file" name="img" />
+								</td>
+							</tr>
+							<tr>
+								<td valign="middle" align="right">
+									生産時間:
+								</td>
+								<td valign="middle" align="left">
+									<input type="text" class="inputgri" name="produceDate" id="birthdate" th:value="${#dates.format(salecar.produceDate,'yyyy/MM/dd')}" placeholder="2000/01/01"/>
+									<span id="birthmsg" style="color: red;"></span>
+								</td>
+							</tr>
+							<tr>
+								<td valign="middle" align="right">
+									価格:
+								</td>
+								<td valign="middle" align="left">
+									<input type="text" class="inputgri" name="salePrice" th:value="${salecar.salePrice}"/>
+								</td>
+							</tr>
+							<tr>
+								<td valign="middle" align="right">
+									里程:
+								</td>
+								<td valign="middle" align="left">
+									<input type="text" class="inputgri" name="odometer" th:value="${salecar.odometer}"/>
+								</td>
+							</tr>
+							<tr>
+								<td valign="middle" align="right">
+									保有者:
+								</td>
+								<td valign="middle" align="left">
+									<input type="text" class="inputgri" name="owner" th:value="${salecar.owner}"/>
+								</td>
+							</tr>
+							<tr>
+							    <td valign="middle" align="right">
+							        性別:
+							    </td>
+							    <td valign="middle" align="left">                                    
+							        <select name="gender">
+							            <option value="1" th:selected="${salecar.gender == 1}">
+							                男
+							            </option>
+							            <option value="0" th:selected="${salecar.gender == 0}">
+							                女
+							            </option>
+							        </select>
+							    </td>
+							</tr>
+
+							<tr>
+								<td valign="middle" align="right">
+									電話番号:
+								</td>
+								<td valign="middle" align="left">
+									<input type="text" class="inputgri" name="phonenum" th:value="${salecar.phonenum}"  placeholder="090-1234-5678"/>
+								</td>
+							</tr>
+							<tr>
+								<td valign="middle" align="right">
+									保有者の居住地:
+								</td>
+								<td valign="middle" align="left">
+									<input type="text" class="inputgri" name="address" th:value="${salecar.address}"/>
+								</td>
+							</tr>
+							
+						</table>
+						<p>
+							<input type="submit" class="button" value="提出する" />
+						</p>
+					</form>
+				</div>			
+				<div class="image">
+					<img th:src="@{/img/pencilcar.jpg}"  width="400px">
+				</div>
+			</div>
+			
+			<div id="footer">
+				<div id="footer_bg">
+					<hr>
+					ABC@126.com
+				</div>
+			</div>
+		</div>
+		<script>
+		var birthdate = document.querySelector('#birthdate')		
+		var birthmsg = document.querySelector('#birthmsg')
+		
+		function checkDate() {
+			
+			var birthcontent=birthdate.value  
+      		var regxName = /^(19|20)\d{2}\/(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])$/
+
+	      if (birthcontent.match(regxName)) {
+
+	        return true	      
+			} else {
+	    	  birthmsg.innerHTML = "誤る日付を入力している。"
+	        return false
+	      } 
+    	} 
+    	
+    	const nowtime = document.querySelector('#nowtime')
+			setInterval(() => {
+				nowtime.innerHTML = getTime()
+			  }, 1000)
+	</script>	
+	</body>
+</html>

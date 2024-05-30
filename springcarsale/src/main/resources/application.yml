@@ -1,0 +1,36 @@
+server:
+  port: 20263
+  servlet:
+    context-path: /carsalethymeleaf
+    
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+  datasource:
+    type:  com.zaxxer.hikari.HikariDataSource #spring默认的连接池
+    driver-class-name:  com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/workjb?characterEncoding=UTF-8
+    username: root
+    password: 5312448th
+  web:
+    resources:
+      static-locations: classpath:/static/,file:${file.upload.dir}
+    
+
+mybatis:
+  mapper-locations:  classpath:com/carsale/mapper/*.xml
+  type-aliases-package:  com.carsale.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+file:
+  upload:
+    dir: C:\pleiades2023\2023-12\workspace202404\springcarsale\upload
+
+#logging:
+#  level:
+#    root: info
+#    '[com.carsale]': debug

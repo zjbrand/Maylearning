@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "file.upload.dir",
+    "type": "java.lang.String",
+    "description": "A description for 'file.upload.dir'"
+  },
+  {
+    "name": "file.download",
+    "type": "java.lang.String",
+    "description": "A description for 'file.download'"
+  },
+  {
+    "name": "dfile.download.dir",
+    "type": "java.lang.String",
+    "description": "A description for 'dfile.download.dir'"
+  }
+]}

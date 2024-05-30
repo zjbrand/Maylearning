@@ -1,0 +1,25 @@
+server:
+  port: 20251
+  servlet:
+    context-path: /thymeleaftest
+    
+    
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+  servlet:
+    multipart:
+      max-file-size: 10MB
+        
+
+file:
+  upload:
+    dir: C:\\pleiades2023\\2023-12\\workspace202404\\springthymeleaf\\upload
+    
+dfile:
+  download:
+    dir: C:\pleiades2023\2023-12\workspace202404\springthymeleaf\download  
+
+    

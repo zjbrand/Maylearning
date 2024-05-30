@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/demo.css}">
+<script th:src="@{/demo.js}"></script>
+</head>
+<body>
+	<h1>Thymeleaf文法</h1>
+	
+	<h4>受け取るStringデーター：<span th:text="${name}"></span></h4>
+	<h4>受け取るIntegerデーター：<span th:text="${age}"></span></h4>
+	<h4>受け取るlabelデーター：<span th:utext="${access}"></span></h4>
+	<hr>
+	<h4>受け取るobjectデーター：<span th:text="${user.id}+' '+${user.name}"></span></h4>
+	<h4>受け取るobjectデーター：<span th:text="${user.name}"></span></h4>
+	<h4>受け取るobjectデーター：<span th:text="${user.salary}"></span></h4>
+	<h4>受け取るobjectデーター：<span th:text="${user.birthday}"></span></h4>
+	<h4>受け取るobjectデーター：<span th:text="${#dates.format(user.birthday,'yyyy-MM-dd HH:mm:ss')}"></span></h4>
+	
+	<input type="text" name="username" th:value="${user.name}">
+	<input type="text" name="birthday" th:value="${user.birthday}">
+	<h4>プロジェクトの名：<span th:text="@{/}"></span></h4>
+	<hr>
+	<ul>
+		<li th:each="user:${users}">
+			id:<span th:text="${user.id}"></span>
+			name:<span th:text="${user.name}"></span>
+			salary:<span th:text="${user.salary}"></span>
+			birthday:<span th:text="${#dates.format(user.birthday,'yyyy/MM/dd')}"></span>
+		</li>
+	</ul>
+	<ul>
+		<li th:each="user,state:${users}">
+		id:<span th:text="${user.id}"></span>
+		state count:<span th:text="${state.count}"></span>
+		state odd:<span th:text="${state.odd}"></span>
+		state even:<span th:text="${state.even}"></span>
+		state size:<span th:text="${state.size}"></span>
+		state index:<span th:text="${state.index}"></span>
+		state first:<span th:text="${state.first}"></span>
+		state last:<span th:text="${state.last}"></span>
+		state current:<span th:text="${state.current}"></span>
+		</li>
+	</ul>
+	<hr>
+	<h4>受け取るsessionデーター：<span th:text="${session.username1}"></span></h4>
+	<h4>受け取るsessionデーター：<span th:text="${session.username}"></span></h4>
+	<ul>
+		<li th:each="user:${session.username}">
+			id:<span th:text="${user.id}"></span>
+			name:<span th:text="${user.name}"></span>
+			salary:<span th:text="${user.salary}"></span>
+			birthday:<span th:text="${#dates.format(user.birthday,'yyyy/MM/dd')}"></span>
+		</li>
+	</ul>
+	<hr>
+	<div th:if="${age<=25}">
+		show me!
+	</div>
+	<button onclick="test()">テスト</button>
+	
+</body>
+</html>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.carsale.dao.SalecarDao">
+
+	<select id="lists" resultType="Salecar">
+		select carid,car_brand,produce_date,sale_price,odometer,photo,owner,gender,phonenum,address,modify_time from `salecar`
+	</select>
+	
+	<insert id="save" parameterType="Salecar" useGeneratedKeys="true" keyProperty="carid">
+		insert into `salecar` 
+		values
+		(#{carid},#{carBrand},#{produceDate},#{salePrice},#{odometer},#{photo},#{owner},#{gender},#{phonenum},#{address},#{modifyTime})
+	</insert>
+	
+	<select id="findById" parameterType="Integer" resultType="Salecar">
+		select * from `salecar`
+		where carid=#{carid}
+	</select>
+	
+	<update id="update" parameterType="Salecar">
+		update `salecar` 
+		set
+		car_brand=#{carBrand},produce_date=#{produceDate},sale_price=#{salePrice},
+		odometer=#{odometer},photo=#{photo},owner=#{owner},gender=#{gender},
+		phonenum=#{phonenum},address=#{address},modify_time=#{modifyTime} 
+		where carid=#{carid}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		delete from `salecar` where carid=#{carid}
+	</delete>
+	
+	<select id="searchCar" resultType="Salecar">
+		select * from `salecar`
+		<where>
+			<if test="searchName!=null and searchName!=''">
+				car_brand like concat('%',#{searchName},'%')
+			</if>
+			<if test="lowSalary!=''">
+				and sale_price >= #{lowSalary}
+			</if>
+			<if test="topSalary!=''">
+				and sale_price &lt;= #{topSalary}
+			</if>
+			<if test="dateBegin!=''">
+				and produce_date >= #{dateBegin}
+			</if>
+			<if test="dateEnd!=''">
+				and produce_date &lt;=#{dateEnd}
+			</if>
+		</where>	
+	</select> 
+
+</mapper>

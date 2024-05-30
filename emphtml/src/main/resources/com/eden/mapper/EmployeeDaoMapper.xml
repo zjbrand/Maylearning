@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eden.dao.EmployeeDao">
+
+	<select id="lists" resultType="Employee">
+		select id,name,salary,birthday,photo from `employee`
+	</select>
+	
+	<insert id="save" parameterType="Employee" useGeneratedKeys="true" keyProperty="id">
+		insert into employee values(#{id},#{name},#{salary},#{birthday},#{photo})
+	</insert>
+	
+	<select id="findById" parameterType="Integer" resultType="Employee">
+		select id,name,salary,birthday,photo from `employee`
+		where id=#{id}
+	</select>
+	
+	<update id="update" parameterType="Employee">
+		update `employee` set name=#{name},salary=#{salary},birthday=#{birthday},photo=#{photo}
+		where id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		delete from `employee` where id=#{id}
+	</delete>
+	
+	<select id="searchEmp" resultType="Employee">
+		select id,name,salary,birthday,photo from `employee`
+		<where>
+			<if test="searchName!=null and searchName!=''">
+				name like concat('%',#{searchName},'%')
+			</if>
+			<if test="lowSalary!=''">
+				and salary >= #{lowSalary}
+			</if>
+			<if test="topSalary!=''">
+				and salary &lt;= #{topSalary}
+			</if>
+			<if test="dateBegin!=''">
+				and birthday >= #{dateBegin}
+			</if>
+			<if test="dateEnd!=''">
+				and birthday  &lt;=#{dateEnd}
+			</if>
+		</where>	
+	</select> 
+
+</mapper>

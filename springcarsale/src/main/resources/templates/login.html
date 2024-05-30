@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="style/style.css"/>
+    <script src="js/script.js"></script>
+</head>
+<body>
+		<div id="wrap">
+			
+			<div id="slogon">
+				<img src="img/SampleLogSm.jpg" alt="SampleLog" width="200px" height="45px">
+			</div>
+			
+			<div id="navigate">	
+				<span id="nowtime"></span>
+			</div>
+			
+			<div class="container">
+				<div class="image">
+		            <img src="img/carWhiteLinePrin.jpg" alt="SampleLog" width="500px" >
+		        </div>
+		        
+		        <div id="content">
+					<h1>
+					登録
+					</h1>
+					<div style="height: 20px;margin-bottom: 30px;">
+						<h3 style="color: red;margin: 5px;"><span th:text="${param.msg}"></span></h3> 
+					</div>
+					
+					<form th:action="@{/admin/login}" method="post">
+		                <table cellpadding="5" cellspacing="5" border="0" class="form_table">
+		                    <tr>
+		                        <td valign="middle" align="right">
+		                            ユーザー名:
+		                        </td>
+		                        <td valign="middle" align="left">
+		                            <input type="text" class="inputgri" name="adminname"/>
+		                        </td>
+		                    </tr>
+		                    <tr>
+		                        <td valign="middle" align="right">
+		                            パスワード:
+		                        </td>
+		                        <td valign="middle" align="left">
+		                            <input type="password" class="inputgri" name="password"/>
+		                        </td>
+		                    </tr>
+		                </table>
+		                <p style="margin-left: 200px;">
+		                    <input type="submit" class="button" value="提出する &raquo;"/>
+		                    
+		                </p>
+		                <p style="margin-left: 50px;">		
+		                    <a th:href="@{/register}">ユーザー名がない場合、こちらへ</a>
+						</p>
+            		</form>
+				</div>			
+			
+			</div>
+			<div style="text-align: center;">			
+			<br>
+			<hr>
+			ABC@126.com
+			</div>
+		</div>
+		<script>
+			const nowtime = document.querySelector('#nowtime')
+			setInterval(() => {
+				nowtime.innerHTML = getTime()
+			  }, 1000) 
+		</script>
+	</body>
+</html>
